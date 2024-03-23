@@ -1,7 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/python3i
 """This module defines a base class for all models in our hbnb clone"""
 import uuid
 from datetime import datetime
+from sqlalchemy import Column, String, DateTime
+import modesl
+from sqlalchemy.ext.declarative import declarative_base
 
 
 class BaseModel:
@@ -42,3 +45,7 @@ class BaseModel:
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
+    def delete(self):
+        """delete object instance
+        """
+        models.storgae.delete(self)

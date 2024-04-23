@@ -1,30 +1,37 @@
 #!/usr/bin/python3
-""" Python flask script that creates 3 routes in an aplicatiom"""
+""" Script that starts a Flask web application """
+from flask import Flask
 
-from flask import Flask, escape
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route('/', strict_slashes=False)
-def hello():
-    return ("Hello HBNB!")
-
-
-@app.route('/hbnb', strict_slashes=False)
+@app.route('/')
 def hello_hbnb():
-    return ('HBNB')
+    """ Print Web """
+    return 'Hello HBNB!'
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def c_isfun(text):
-    return ('C {}'.format(escape(text.replace("_", " "))))
+@app.route('/hbnb')
+def hbnb():
+    """ Print Web """
+    return 'HBNB'
 
 
-@app.route('/python', strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-def python(text='is_cool'):
-    return ('Python {}'.format(escape(text.replace("_", " "))))
+@app.route('/c/<text>')
+def c_is_fun(text):
+    """ Print a char C followed by the value of the text variable """
+    return 'C {}'.format(text.replace('_', ' '))
 
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=False)
+@app.route('/python')
+@app.route('/python/<text>')
+def python_is_cool(text='is cool'):
+    """ Print Python, followed by the value of the text variable,
+    with default value of text: is cool"""
+    return 'Python {}'.format(text.replace('_', ' '))
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)

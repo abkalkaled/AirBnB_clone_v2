@@ -1,27 +1,28 @@
 #!/usr/bin/python3
-"""
-    Python Flask script that starts up and applications and
-    creates two routes / amd /hbnb
-"""
-
-from flask import Flask, escape
+"""script that starts a Flask web application"""
+from flask import Flask
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route('/', strict_slashes=False)
-def home():
-    return ("Hello HBNB!")
+@app.route('/')
+def hello_hbnb():
+    """print web"""
+    return 'Hello HBNB!'
 
 
-@app.route('/hbnb', strict_slashes=False)
-def home_hbnb():
-    return ("HBNB")
+@app.route('/hbnb')
+def hbnb():
+    """print web"""
+    return 'HBNB'
 
 
 @app.route('/c/<text>')
-def c_isfun(text):
-    return ('C {}'.format(escape(text.replace("_", " "))))
+def c_is_fun(text):
+    """print C followed by the value of the text variable"""
+    return 'C {}'.format(text.replace('_', ' '))
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
